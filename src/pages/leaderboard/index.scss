@@ -1,0 +1,41 @@
+.leaderboard {
+  padding: 20px;
+  background: #f9f9f9;
+  min-height: 100vh;
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .entry {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .rank {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2575fc;
+      margin-right: 15px;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      Text {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  }
+}

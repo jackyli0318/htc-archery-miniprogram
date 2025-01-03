@@ -1,0 +1,59 @@
+.input {
+  padding: 20px;
+  background: #f9f9f9;
+  min-height: 100vh;
+
+  .title {
+    font-size: 36px; /* 放大标题字体 */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .picker {
+    font-size: 24px; /* 增大字体 */
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .scores {
+    margin: 30px 0;
+
+    .score-row {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+
+      .score {
+        font-size: 28px; /* 放大字体 */
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        border-radius: 12px;
+        background: #fff;
+        border: 2px solid transparent;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .score.selected {
+        border-color: #2575fc;
+        background: #eaf3ff;
+      }
+    }
+  }
+
+  .save-button {
+    font-size: 26px; /* 放大字体 */
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}

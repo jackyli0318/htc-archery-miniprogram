@@ -1,0 +1,40 @@
+.index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 垂直居中 */
+  background-color: #f9f9f9; /* 浅灰背景 */
+
+  .title {
+    font-size: 40px; /* 增大标题字体 */
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px; /* 与按钮组之间增加间距 */
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* 按钮之间的间距 */
+  }
+
+  .button {
+    font-size: 24px; /* 增大按钮字体 */
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* 渐变背景 */
+    border: none;
+    border-radius: 12px; /* 按钮圆角 */
+    padding: 15px 30px; /* 调整按钮内边距 */
+    width: 250px; /* 固定按钮宽度 */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 按钮阴影 */
+  }
+
+  .button:active {
+    background: #2575fc; /* 按下时按钮颜色变化 */
+  }
+}

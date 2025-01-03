@@ -1,0 +1,38 @@
+/* 全局基础样式 */
+page, view, text, button, input, textarea, picker {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-size: 20px; /* 调整基础字体大小 */
+  line-height: 1.8; /* 增加行高，提升阅读体验 */
+}
+
+button, input, textarea, picker {
+  font-size: 18px; /* 统一按钮和输入框的字体大小 */
+}
+
+.save-button {
+  font-size: 22px; /* 保存按钮的字体大小 */
+  padding: 20px 15px;
+  border-radius: 12px;
+}
+
+/* 调整按钮的样式 */
+button {
+  padding: 15px 20px;
+  border-radius: 10px;
+}
+
+.text-large {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text-medium {
+  font-size: 20px;
+}
+
+.text-small {
+  font-size: 16px;
+}
