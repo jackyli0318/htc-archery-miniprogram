@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { View, Picker, Text, Button } from '@tarojs/components';
+import { View, Picker, Text, Button, Input } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import Keyboard from '../../components/Keyboard';
+import BottomNavBar from '../../components/BottomNavBar';
 import './index.scss';
 
 const distances = ['10米', '18米', '30米'];
-const targetSizes = ['40全环', '60全环', '80全环', '40半环', '60半环', '80半环'];
+const targetSizes = ['40半环', '60半环', '80半环', '40全环', '60全环', '80全环'];
 const groupCounts = [1, 5, 6, 10, 12];
 
-const Input: React.FC = () => {
+const InputPage: React.FC = () => {
   const [distance, setDistance] = useState('');
   const [targetSize, setTargetSize] = useState('');
   const [groupCount, setGroupCount] = useState(0);
   const [scores, setScores] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(0); // 当前选中的成绩索引
+  const [name, setName] = useState(''); // 用户姓名
 
   const isHalfRing = targetSize.includes('半环');
 
@@ -45,6 +47,11 @@ const Input: React.FC = () => {
   };
 
   const saveScores = () => {
+    if (!name) {
+      Taro.showToast({ title: '请输入姓名', icon: 'none' });
+      return;
+    }
+
     const numericScores = scores.map((score) =>
       score === 'X' ? 10 : score === 'M' ? 0 : parseInt(score, 10)
     );
@@ -53,6 +60,7 @@ const Input: React.FC = () => {
     const countX = scores.filter((score) => score === 'X').length;
 
     const userScore = {
+      name, // 保存姓名
       distance,
       targetSize,
       groupCount,
@@ -71,6 +79,12 @@ const Input: React.FC = () => {
   return (
     <View className="input">
       <Text className="title text-large">输入射箭成绩</Text>
+      <Input
+        className="name-input"
+        placeholder="请输入姓名"
+        value={name}
+        onInput={(e) => setName(e.detail.value)}
+      />
       <Picker mode="selector" range={distances} onChange={(e) => setDistance(distances[+e.detail.value])}>
         <View className="picker text-medium">选择距离: {distance || '未选择'}</View>
       </Picker>
@@ -82,22 +96,40 @@ const Input: React.FC = () => {
       </Picker>
 
       <View className="scores">
-        {Array.from({ length: groupCount }, (_, groupIndex) => (
-          <View className="score-row" key={groupIndex}>
-            {Array.from({ length: 6 }, (_, arrowIndex) => {
-              const index = groupIndex * 6 + arrowIndex;
-              return (
-                <Text
-                  className={`score text-large ${selectedIndex === index ? 'selected' : ''}`}
-                  key={index}
-                  onClick={() => setSelectedIndex(index)} // 点击选中该格子
-                >
-                  {scores[index] !== undefined ? scores[index] : ''}
-                </Text>
-              );
-            })}
-          </View>
-        ))}
+        {Array.from({ length: groupCount }, (_, groupIndex) => {
+          const groupScores = scores.slice(groupIndex * 6, groupIndex * 6 + 6); // 获取本行成绩
+          const groupTotal = groupScores.reduce((sum, score) => {
+            if (score === 'X') {
+              return sum + 10; // X 环计为 10
+            } else if (score === 'M') {
+              return sum; // M 计为 0
+            } else if (score && !isNaN(Number(score))) {
+              return sum + Number(score); // 确保 score 是数字
+            } else {
+              return sum; // 对于无效值，跳过
+            }
+          }, 0);
+
+          return (
+            <View key={groupIndex}>
+              <View className="score-row">
+                {Array.from({ length: 6 }, (_, arrowIndex) => {
+                  const index = groupIndex * 6 + arrowIndex;
+                  return (
+                    <Text
+                      className={`score text-large ${selectedIndex === index ? 'selected' : ''}`}
+                      key={index}
+                      onClick={() => setSelectedIndex(index)}
+                    >
+                      {scores[index] !== undefined ? scores[index] : ''}
+                    </Text>
+                  );
+                })}
+              </View>
+              <Text className="group-total">小计: {groupTotal}</Text>
+            </View>
+          );
+        })}
       </View>
 
       <Keyboard
@@ -109,13 +141,12 @@ const Input: React.FC = () => {
         }
       />
 
-
       <Button className="save-button" onClick={saveScores}>
         保存成绩
       </Button>
-
+      <BottomNavBar /> {/* 添加底部导航栏 */}
     </View>
   );
 };
 
-export default Input;
+export default InputPage;

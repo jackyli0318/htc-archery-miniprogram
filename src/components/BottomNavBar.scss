@@ -1,0 +1,30 @@
+.bottom-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* 固定底部导航栏高度 */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+
+  .nav-item {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+
+    &.active {
+      color: #2575fc;
+      font-weight: bold;
+    }
+  }
+
+  .nav-label {
+    margin-top: 5px;
+  }
+}

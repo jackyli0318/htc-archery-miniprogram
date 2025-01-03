@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+import BottomNavBar from '../../components/BottomNavBar';
 import './index.scss';
 
 interface Score {
+  name: string;
   distance: string;
   targetSize: string;
   groupCount: number;
@@ -37,6 +39,7 @@ const Leaderboard: React.FC = () => {
         <View className="entry" key={index}>
           <Text className="rank">#{index + 1}</Text>
           <View className="details">
+            <Text>姓名: {score.name}</Text>
             <Text>距离: {score.distance}</Text>
             <Text>靶规格: {score.targetSize}</Text>
             <Text>总环数: {score.totalScore}</Text>
@@ -45,6 +48,7 @@ const Leaderboard: React.FC = () => {
           </View>
         </View>
       ))}
+      <BottomNavBar /> {/* 添加底部导航栏 */}
     </View>
   );
 };

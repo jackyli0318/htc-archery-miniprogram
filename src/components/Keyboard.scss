@@ -1,36 +1,36 @@
 .keyboard {
   display: flex;
   flex-direction: column;
-  gap: 15px; // 增加行间距
+  gap: 15px; /* 增加行间距 */
   margin-top: 30px;
 
   .keyboard-row {
     display: flex;
     justify-content: center;
-    gap: 15px; // 增大按钮间距
+    gap: 15px; /* 增大按钮间距 */
 
     .key {
-      width: 80px; // 增大按钮宽度
-      height: 80px; // 增大按钮高度
+      width: 80px; /* 所有按钮宽度一致 */
+      height: 80px; /* 所有按钮高度一致 */
       display: flex;
       justify-content: center;
       align-items: center;
       background: #2575fc;
       color: #fff;
-      font-size: 28px; // 调大字体
+      font-size: 28px; /* 调大字体 */
       font-weight: bold;
       border-radius: 12px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       border: none;
-    }
+      transition: background 0.2s;
 
-    .key:active {
-      background: #1e5bbf;
+      &:active {
+        background: #1e5bbf;
+      }
     }
 
     .delete-key {
-      width: 180px; // 删除按钮更宽
-      height: 80px;
+      width: 180px; /* 仅宽度增加 */
     }
   }
 }

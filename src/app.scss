@@ -3,6 +3,12 @@ page, view, text, button, input, textarea, picker {
   box-sizing: border-box;
 }
 
+/* app.scss */
+.page {
+  padding-bottom: 60px; /* 为底部导航栏留出空间 */
+  box-sizing: border-box;
+}
+
 html, body {
   font-size: 20px; /* 调整基础字体大小 */
   line-height: 1.8; /* 增加行高，提升阅读体验 */

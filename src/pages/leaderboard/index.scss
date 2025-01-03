@@ -1,5 +1,6 @@
 .leaderboard {
   padding: 20px;
+  padding-bottom: 60px; /* 为底部导航栏留出空间 */
   background: #f9f9f9;
   min-height: 100vh;
 
@@ -9,6 +10,12 @@
     color: #333;
     text-align: center;
     margin-bottom: 20px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .entry {
