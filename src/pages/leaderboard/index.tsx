@@ -48,7 +48,6 @@ const Leaderboard: React.FC = () => {
 
   // 删除成绩
   const deleteScore = (index: number) => {
-    // 获取筛选后的成绩在原始成绩中的索引
     const scoreToDelete = filteredScores[index];
     const originalIndex = scores.findIndex(
       (score) =>
@@ -62,20 +61,26 @@ const Leaderboard: React.FC = () => {
     );
 
     if (originalIndex !== -1) {
-      // 删除对应成绩
       const updatedScores = [...scores];
       updatedScores.splice(originalIndex, 1);
 
-      // 更新本地存储和状态
       Taro.setStorageSync('leaderboard', updatedScores);
       setScores(updatedScores);
       Taro.showToast({ title: '成绩已删除', icon: 'success' });
     }
   };
 
+  // 获取名次对应的奖牌 emoji
+  const getRankEmoji = (rank: number) => {
+    if (rank === 1) return '🥇'; // 金牌
+    if (rank === 2) return '🥈'; // 银牌
+    if (rank === 3) return '🥉'; // 铜牌
+    return `#${rank}`; // 普通排名
+  };
+
   return (
     <View className="leaderboard">
-      <Text className="title">排行榜</Text>
+      <Text className="title">狮家射箭排行榜</Text>
 
       {/* 筛选条件 */}
       <View className="filters">
@@ -91,28 +96,24 @@ const Leaderboard: React.FC = () => {
       </View>
 
       {/* 排行榜 */}
-      {filteredScores.map((score, index) => (
-        <View className="entry" key={index}>
-          <View className="rank-section">
-            <Text className="rank">#{index + 1}</Text>
-            <Button
-              className="delete-button"
-              onClick={() => deleteScore(index)}
-              style={{ marginLeft: '10px', color: '#ff4d4f', fontSize: '14px' }}
-            >
+      <View className="list">
+        {filteredScores.map((score, index) => (
+          <View className="entry" key={index}>
+            <Text className="rank">{getRankEmoji(index + 1)}</Text>
+            <View className="details">
+              <Text className="name">姓名: {score.name}</Text>
+              <Text className="score">总环数: {score.totalScore}</Text>
+              <Text>距离: {score.distance}</Text>
+              <Text>靶规格: {score.targetSize}</Text>
+              <Text>10 + X 数量: {score.count10}</Text>
+              <Text>X 数量: {score.countX}</Text>
+            </View>
+            <Button className="delete-button" onClick={() => deleteScore(index)}>
               删除
             </Button>
           </View>
-          <View className="details">
-            <Text>姓名: {score.name}</Text>
-            <Text>距离: {score.distance}</Text>
-            <Text>靶规格: {score.targetSize}</Text>
-            <Text>总环数: {score.totalScore}</Text>
-            <Text>10 + X 数量: {score.count10}</Text>
-            <Text>X 数量: {score.countX}</Text>
-          </View>
-        </View>
-      ))}
+        ))}
+      </View>
       <BottomNavBar />
     </View>
   );
