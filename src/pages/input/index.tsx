@@ -14,32 +14,25 @@ const InputPage: React.FC = () => {
   const [targetSize, setTargetSize] = useState('');
   const [groupCount, setGroupCount] = useState(0);
   const [scores, setScores] = useState<string[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(0); // 当前选中的成绩索引
-  const [name, setName] = useState(''); // 用户姓名
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
+  const [name, setName] = useState('');
 
   const isHalfRing = targetSize.includes('半环');
 
-  // 更新成绩
   const handleScoreChange = (newScore: string | null) => {
     if (selectedIndex === null) return;
 
     const updatedScores = [...scores];
 
     if (newScore === null) {
-      // 删除当前格子内容
       updatedScores[selectedIndex] = '';
       setScores(updatedScores);
-
-      // 删除时光标往左移动
       if (selectedIndex > 0) {
         setSelectedIndex(selectedIndex - 1);
       }
     } else {
-      // 更新当前格子的成绩
       updatedScores[selectedIndex] = newScore;
       setScores(updatedScores);
-
-      // 输入完成后光标往右移动
       if (selectedIndex < groupCount * 6 - 1) {
         setSelectedIndex(selectedIndex + 1);
       }
@@ -60,7 +53,7 @@ const InputPage: React.FC = () => {
     const countX = scores.filter((score) => score === 'X').length;
 
     const userScore = {
-      name, // 保存姓名
+      name,
       distance,
       targetSize,
       groupCount,
@@ -69,8 +62,9 @@ const InputPage: React.FC = () => {
       countX,
     };
 
-    const existingScores = Taro.getStorageSync('scores') || [];
-    Taro.setStorageSync('scores', [...existingScores, userScore]);
+    const existingScores = Taro.getStorageSync('leaderboard') || [];
+    const newLeaderboard = [...existingScores, userScore];
+    Taro.setStorageSync('leaderboard', newLeaderboard);
 
     Taro.showToast({ title: '成绩保存成功', icon: 'success' });
     Taro.navigateTo({ url: '/pages/leaderboard/index' });
@@ -97,17 +91,12 @@ const InputPage: React.FC = () => {
 
       <View className="scores">
         {Array.from({ length: groupCount }, (_, groupIndex) => {
-          const groupScores = scores.slice(groupIndex * 6, groupIndex * 6 + 6); // 获取本行成绩
+          const groupScores = scores.slice(groupIndex * 6, groupIndex * 6 + 6);
           const groupTotal = groupScores.reduce((sum, score) => {
-            if (score === 'X') {
-              return sum + 10; // X 环计为 10
-            } else if (score === 'M') {
-              return sum; // M 计为 0
-            } else if (score && !isNaN(Number(score))) {
-              return sum + Number(score); // 确保 score 是数字
-            } else {
-              return sum; // 对于无效值，跳过
-            }
+            if (score === 'X') return sum + 10;
+            if (score === 'M') return sum;
+            if (score && !isNaN(Number(score))) return sum + Number(score);
+            return sum;
           }, 0);
 
           return (
@@ -144,7 +133,7 @@ const InputPage: React.FC = () => {
       <Button className="save-button" onClick={saveScores}>
         保存成绩
       </Button>
-      <BottomNavBar /> {/* 添加底部导航栏 */}
+      <BottomNavBar />
     </View>
   );
 };

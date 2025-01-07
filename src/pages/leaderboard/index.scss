@@ -46,3 +46,57 @@
     }
   }
 }
+
+.filters {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+
+  .filter-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f5f5f5;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+  }
+}
+
+.entry {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+
+  .rank-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .rank {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .delete-button {
+    background: none;
+    border: none;
+    color: #ff4d4f;
+    font-size: 14px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .details {
+    margin-top: 10px;
+
+    Text {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  }
+}
