@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Picker, Button } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 import BottomNavBar from '../../components/BottomNavBar';
 import './index.scss';
 
@@ -26,22 +26,38 @@ const Leaderboard: React.FC = () => {
   const [selectedTotalArrows, setSelectedTotalArrows] = useState('全部');
 
   // 初始化排行榜数据
-  useEffect(() => {
+  const loadScores = () => {
     const storedScores: Score[] = Taro.getStorageSync('leaderboard') || [];
     setScores(storedScores);
     setFilteredScores(storedScores);
-  }, []);
+  };
 
-  // 根据筛选条件更新排行榜
+  // 页面显示时加载数据
+  useDidShow(() => {
+    loadScores();
+  });
+
+  // 根据筛选条件更新排行榜，并进行排序
   useEffect(() => {
-    const filterScores = scores.filter((score) => {
-      const matchDistance = selectedDistance === '全部' || score.distance === selectedDistance;
-      const matchTargetSize = selectedTargetSize === '全部' || score.targetSize === selectedTargetSize;
-      const matchTotalArrows =
-        selectedTotalArrows === '全部' || score.groupCount * 6 === parseInt(selectedTotalArrows);
+    const filterScores = scores
+      .filter((score) => {
+        const matchDistance = selectedDistance === '全部' || score.distance === selectedDistance;
+        const matchTargetSize = selectedTargetSize === '全部' || score.targetSize === selectedTargetSize;
+        const matchTotalArrows =
+          selectedTotalArrows === '全部' || score.groupCount * 6 === parseInt(selectedTotalArrows);
 
-      return matchDistance && matchTargetSize && matchTotalArrows;
-    });
+        return matchDistance && matchTargetSize && matchTotalArrows;
+      })
+      .sort((a, b) => {
+        // 排序逻辑
+        if (b.totalScore !== a.totalScore) {
+          return b.totalScore - a.totalScore; // 优先按总分降序
+        }
+        if (b.count10 + b.countX !== a.count10 + a.countX) {
+          return b.count10 + b.countX - (a.count10 + a.countX); // 再按 X+10 的数量降序
+        }
+        return b.countX - a.countX; // 最后按 X 的数量降序
+      });
 
     setFilteredScores(filterScores);
   }, [selectedDistance, selectedTargetSize, selectedTotalArrows, scores]);
@@ -105,7 +121,7 @@ const Leaderboard: React.FC = () => {
               <Text className="score">总环数: {score.totalScore}</Text>
               <Text>距离: {score.distance}</Text>
               <Text>靶规格: {score.targetSize}</Text>
-              <Text>10 + X 数量: {score.count10}</Text>
+              <Text>10 + X 数量: {score.count10 + score.countX}</Text>
               <Text>X 数量: {score.countX}</Text>
             </View>
             <Button className="delete-button" onClick={() => deleteScore(index)}>
