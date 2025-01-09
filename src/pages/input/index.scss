@@ -1,8 +1,11 @@
 .input {
   padding: 20px;
-  padding-bottom: 80px; /* 为底部导航栏和按钮留出空间 */
-  background: linear-gradient(to bottom, #f9f9f9, #eaf3ff); /* 背景渐变 */
+  padding-bottom: 80px; // 为底部导航栏和按钮留出空间
+  background: linear-gradient(to bottom, #f9f9f9, #eaf3ff); // 背景渐变
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // 添加居中对齐
 
   .title {
     font-size: 36px;
@@ -10,6 +13,7 @@
     text-align: center;
     color: #333;
     margin-bottom: 30px;
+    width: 100%; // 确保标题宽度充满容器
   }
 
   .name-input {
@@ -17,6 +21,8 @@
     padding: 15px;
     margin-bottom: 25px;
     background: #fff;
+    width: calc(100%); // 调整宽度以适应屏幕
+    max-width: 500px; // 最大宽度限制
     border-radius: 12px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -28,6 +34,8 @@
     padding: 15px 20px;
     margin-bottom: 25px;
     background: #fff;
+    width: calc(100%); // 调整宽度以适应屏幕
+    max-width: 500px; // 最大宽度限制
     border-radius: 12px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -87,10 +95,10 @@
     background: linear-gradient(135deg, #007aff, #005bb5);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-  }
 
-  .save-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
   }
 }
