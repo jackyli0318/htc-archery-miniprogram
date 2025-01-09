@@ -1,32 +1,38 @@
 .input {
   padding: 20px;
-  padding-bottom: 60px; /* 为底部导航栏留出空间 */
-  background: #f9f9f9;
+  padding-bottom: 80px; /* 为底部导航栏和按钮留出空间 */
+  background: linear-gradient(to bottom, #f9f9f9, #eaf3ff); /* 背景渐变 */
   min-height: 100vh;
 
   .title {
-    font-size: 36px; /* 放大标题字体 */
+    font-size: 36px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
+    color: #333;
+    margin-bottom: 30px;
   }
 
   .name-input {
-    font-size: 24px;
-    padding: 10px;
-    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 15px;
+    margin-bottom: 25px;
     background: #fff;
     border-radius: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
   }
 
   .picker {
-    font-size: 24px; /* 增大字体 */
+    font-size: 18px;
     padding: 15px 20px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background: #fff;
     border-radius: 12px;
+    border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+    text-align: center;
   }
 
   .scores {
@@ -36,43 +42,55 @@
       display: flex;
       justify-content: space-around;
       margin-bottom: 15px;
-      position: relative;
 
       .score {
-        font-size: 28px; /* 放大字体 */
-        width: 70px;
-        height: 70px;
-        line-height: 70px;
+        font-size: 20px;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
         text-align: center;
-        border-radius: 12px;
+        border-radius: 8px;
         background: #fff;
         border: 2px solid transparent;
         cursor: pointer;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+      }
+
+      .score:hover {
+        transform: scale(1.1); /* 鼠标悬停放大 */
       }
 
       .score.selected {
-        border-color: #2575fc;
-        background: #eaf3ff;
+        border-color: #007aff;
+        background: #d6eaff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
+    }
 
-      .group-total {
-        position: absolute;
-        right: 0;
-        bottom: -20px;
-        font-size: 16px;
-        color: #333;
-      }
+    .group-total {
+      text-align: right;
+      font-size: 16px;
+      color: #666;
+      margin-top: -10px;
     }
   }
 
   .save-button {
-    font-size: 26px; /* 放大字体 */
-    padding: 20px;
+    display: block;
+    margin: 30px auto;
+    font-size: 20px;
+    padding: 15px 30px;
     border-radius: 12px;
     text-align: center;
     color: #fff;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #007aff, #005bb5);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   }
 }

@@ -15,22 +15,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #2575fc;
+      background: #007aff; /* 改用更鲜明的蓝色 */
       color: #fff;
-      font-size: 28px; /* 调大字体 */
+      font-size: 24px; /* 调大字体 */
       font-weight: bold;
       border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       border: none;
-      transition: background 0.2s;
+      transition: all 0.2s ease-in-out;
 
       &:active {
-        background: #1e5bbf;
+        background: #005bb5; /* 按下时颜色加深 */
       }
     }
 
-    .delete-key {
-      width: 180px; /* 仅宽度增加 */
+    .key:hover {
+      transform: scale(1.1); /* 悬停时放大 */
     }
   }
 }

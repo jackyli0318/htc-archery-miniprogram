@@ -23,7 +23,6 @@ const InputPage: React.FC = () => {
     if (selectedIndex === null) return;
 
     const updatedScores = [...scores];
-
     if (newScore === null) {
       updatedScores[selectedIndex] = '';
       setScores(updatedScores);
@@ -72,7 +71,7 @@ const InputPage: React.FC = () => {
 
   return (
     <View className="input">
-      <Text className="title text-large">输入射箭成绩</Text>
+      <Text className="title">输入射箭成绩</Text>
       <Input
         className="name-input"
         placeholder="请输入姓名"
@@ -80,13 +79,22 @@ const InputPage: React.FC = () => {
         onInput={(e) => setName(e.detail.value)}
       />
       <Picker mode="selector" range={distances} onChange={(e) => setDistance(distances[+e.detail.value])}>
-        <View className="picker text-medium">选择距离: {distance || '未选择'}</View>
+        <View className="picker">选择距离: {distance || '未选择'}</View>
       </Picker>
       <Picker mode="selector" range={targetSizes} onChange={(e) => setTargetSize(targetSizes[+e.detail.value])}>
-        <View className="picker text-medium">选择箭靶规格: {targetSize || '未选择'}</View>
+        <View className="picker">选择箭靶规格: {targetSize || '未选择'}</View>
       </Picker>
-      <Picker mode="selector" range={groupCounts} onChange={(e) => setGroupCount(groupCounts[+e.detail.value])}>
-        <View className="picker text-medium">选择组数: {groupCount || '未选择'}</View>
+      <Picker
+        mode="selector"
+        range={groupCounts}
+        onChange={(e) => {
+          const count = groupCounts[+e.detail.value];
+          setGroupCount(count);
+          setScores(Array(count * 6).fill(''));
+          setSelectedIndex(0);
+        }}
+      >
+        <View className="picker">选择组数: {groupCount || '未选择'}</View>
       </Picker>
 
       <View className="scores">
@@ -106,7 +114,7 @@ const InputPage: React.FC = () => {
                   const index = groupIndex * 6 + arrowIndex;
                   return (
                     <Text
-                      className={`score text-large ${selectedIndex === index ? 'selected' : ''}`}
+                      className={`score ${selectedIndex === index ? 'selected' : ''}`}
                       key={index}
                       onClick={() => setSelectedIndex(index)}
                     >
