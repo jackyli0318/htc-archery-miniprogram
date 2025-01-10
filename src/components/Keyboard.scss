@@ -24,13 +24,13 @@
       border: none;
       transition: all 0.2s ease-in-out;
 
-      .delete-key {
-        width: 100px;
-      }
-
       &:active {
         background: #005bb5; /* 按下时颜色加深 */
       }
+    }
+
+    .delete-key {
+      width: 120px;
     }
 
     .invisible {
