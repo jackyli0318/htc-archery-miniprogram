@@ -133,8 +133,8 @@ const InputPage: React.FC = () => {
         onChange={handleScoreChange}
         options={
           isHalfRing
-            ? [['X', '10', '9', '8', '7', '6'], ['M', '删除']]
-            : [['X', '10', '9', '8', '7', '6'], ['5', '4', '3', '2', '1', 'M'], ['删除']]
+            ? [['invisible', 'X', '10', '9', '8', '7', '6'], ['invisible', 'M', '删除']]
+            : [['invisible', 'X', '10', '9', '8', '7', '6'], ['invisible', '5', '4', '3', '2', '1', 'M'], ['删除']]
         }
       />
 

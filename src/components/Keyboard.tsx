@@ -23,7 +23,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onChange, options }) => {
           {row.map((key) => (
             <Button
               key={key}
-              className={`key ${key === '删除' ? 'delete-key' : ''}`}
+              className={`key ${key === '删除' ? 'delete-key' : ''} ${key}` }
               onClick={() => handleClick(key)}
             >
               {key}
