@@ -21,10 +21,26 @@
     &.active {
       color: #2575fc;
       font-weight: bold;
-    }
-  }
 
-  .nav-label {
-    margin-top: 5px;
+      .icon {
+        transform: scale(1.2); /* 放大选中图标 */
+      }
+    }
+
+    .icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .nav-label {
+      margin-top: 5px;
+    }
   }
 }

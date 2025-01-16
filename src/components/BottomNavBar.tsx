@@ -6,12 +6,15 @@ import './BottomNavBar.scss';
 interface NavItem {
   label: string;
   pagePath: string;
+  iconPath: string;
+  selectedIconPath: string;
 }
 
 const navItems: NavItem[] = [
-  { label: '首页', pagePath: '/pages/index/index' },
-  { label: '输入成绩', pagePath: '/pages/input/index' },
-  { label: '排行榜', pagePath: '/pages/leaderboard/index' },
+  { label: '首页', pagePath: '/pages/index/index', iconPath: '/assets/icons/home.png', selectedIconPath: '/assets/icons/home_active.png' },
+  { label: '输入成绩', pagePath: '/pages/input/index', iconPath: '/assets/icons/input.png', selectedIconPath: '/assets/icons/input_active.png' },
+  { label: '排行榜', pagePath: '/pages/leaderboard/index', iconPath: '/assets/icons/rank.png', selectedIconPath: '/assets/icons/rank_active.png' },
+  { label: '我的', pagePath: '/pages/mine/index', iconPath: '/assets/icons/mine.png', selectedIconPath: '/assets/icons/mine_active.png' },
 ];
 
 const BottomNavBar: React.FC = () => {
@@ -25,15 +28,21 @@ const BottomNavBar: React.FC = () => {
 
   return (
     <View className="bottom-nav-bar">
-      {navItems.map((item, index) => (
-        <View
-          key={index}
-          className={`nav-item ${currentPage === item.pagePath ? 'active' : ''}`}
-          onClick={() => handleNavigate(item.pagePath)}
-        >
-          <Text className="nav-label">{item.label}</Text>
-        </View>
-      ))}
+      {navItems.map((item, index) => {
+        const isActive = currentPage === item.pagePath;
+        return (
+          <View
+            key={index}
+            className={`nav-item ${isActive ? 'active' : ''}`}
+            onClick={() => handleNavigate(item.pagePath)}
+          >
+            <View className="icon-container">
+              <img src={isActive ? item.selectedIconPath : item.iconPath} alt={item.label} className="icon" />
+            </View>
+            <Text className="nav-label">{item.label}</Text>
+          </View>
+        );
+      })}
     </View>
   );
 };

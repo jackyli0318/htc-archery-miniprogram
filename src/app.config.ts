@@ -2,7 +2,8 @@ export default defineAppConfig({
   pages: [
     'pages/index/index', // 首页
     'pages/input/index', // 成绩输入页面
-    'pages/leaderboard/index' // 排行榜页面
+    'pages/leaderboard/index', // 排行榜页面
+    'pages/mine/index', // 我的页面
   ],
   tabBar: {
     color: '#666666', // 默认文字颜色
@@ -27,6 +28,12 @@ export default defineAppConfig({
         text: '排行榜',
         iconPath: 'assets/icons/rank.png',
         selectedIconPath: 'assets/icons/rank_active.png',
+      },
+      {
+        pagePath: 'pages/mine/index',
+        text: '我的',
+        iconPath: 'assets/icons/mine.png',
+        selectedIconPath: 'assets/icons/mine_active.png',
       },
     ],
   },
