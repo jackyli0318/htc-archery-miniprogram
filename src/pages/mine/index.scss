@@ -1,11 +1,20 @@
+.info-box {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* 垂直居中 */
+  height: 100vh;
   padding: 20px;
-  background-color: #f8f9fa; /* 背景色 */
+  background-color: #f0f2f5;
 }
 
 .title {
@@ -15,14 +24,20 @@
   color: #333;
 }
 
+.form,
+.user-info {
+  width: 100%;
+  max-width: 400px;
+}
+
 .info {
-  font-size: 18px;
-  color: #666;
+  font-size: 16px;
+  color: #444;
   margin-bottom: 10px;
 }
 
 .input {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
@@ -30,24 +45,21 @@
   font-size: 16px;
 }
 
-.button {
-  width: 90%;
-  padding: 10px;
-  background-color: #2575fc;
-  color: #fff;
+.button, .cancel-button {
+  width: 100%;
+  padding: 12px;
   text-align: center;
   border-radius: 5px;
   font-size: 18px;
   margin-top: 10px;
 }
 
+.button {
+  background-color: #1890ff;
+  color: #fff;
+}
+
 .cancel-button {
-  width: 90%;
-  padding: 10px;
   background-color: #ccc;
   color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 18px;
-  margin-top: 10px;
 }
