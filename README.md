@@ -1,13 +1,4 @@
 # HTC-Archery-MiniProgram
-HTC射箭协会小程序(前端)
-
-Beta版本功能:
-1. 记录射箭成绩
-2. 查看排行榜
-
-
-
-# HTC-Archery-MiniProgram
 HTC 射箭协会小程序（前端）
 
 ## Beta 版本功能
